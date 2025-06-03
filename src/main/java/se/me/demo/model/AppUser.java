@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.hibernate.Length;
+import se.me.demo.util.ValidPassword;
 
 @Entity
 public class AppUser {
@@ -19,8 +20,7 @@ public class AppUser {
     @NotBlank(message = "name may not be blank")
     private String username;
 
-    @Size(min = 8, message = "must be minimum 8 characters")
-    @Size(max = 20, message = "must be max 20 characters")
+    @ValidPassword
     private String password;
 
     @NotBlank(message = "role may not be empty")
