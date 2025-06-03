@@ -17,13 +17,13 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "name may not be blank")
+    @NotBlank(message = "Please enter username")
     private String username;
 
     @ValidPassword
     private String password;
 
-    @NotBlank(message = "role may not be empty")
+    @NotBlank(message = "Invalid role")
     private String role;
 
     private Boolean consentGiven;
