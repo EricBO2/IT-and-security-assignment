@@ -51,8 +51,13 @@ public class SecurityConfig {
                         "/swagger-ui.html",
                         "/swagger-ui/**",
                         "/v3/api-docs/**",
-                        "/v3/api-docs.yaml"
-                ).permitAll());
+                        "/v3/api-docs.yaml",
+                        "/register",
+                        "/home"
+                    ).permitAll()
+                        .requestMatchers("/user").hasAnyRole("USER","ADMIN")
+                        .requestMatchers("/admin").hasRole("ADMIN"));
+
 
         http.authorizeHttpRequests(authorize ->
                 authorize.anyRequest().authenticated());
@@ -108,7 +113,7 @@ public class SecurityConfig {
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter(){
         JwtGrantedAuthoritiesConverter converter = new JwtGrantedAuthoritiesConverter();
-        converter.setAuthorityPrefix("ROLE_");
+        converter.setAuthorityPrefix("");
         converter.setAuthoritiesClaimName("scope");
 
         JwtAuthenticationConverter authenticationConverter = new JwtAuthenticationConverter();

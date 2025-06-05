@@ -21,9 +21,6 @@ public class AuthController {
         this.tokenService = tokenService;
     }
 
-
-    public record LoginRequest(String username, String password) {}
-
     @PostMapping
     public ResponseEntity<String> token(@RequestBody LoginRequest loginRequest){
         Authentication authentication = authenticationManager.authenticate(
