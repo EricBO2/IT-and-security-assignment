@@ -3,7 +3,7 @@ package se.me.demo.service;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import se.me.demo.exceptions.UserNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import se.me.demo.model.AppUser;
@@ -23,7 +23,7 @@ public class MyUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) {
         AppUser user = appUserRepository.findByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException(username);
+            throw new UserNotFoundException(username + " not found");
         }
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
