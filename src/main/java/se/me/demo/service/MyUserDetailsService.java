@@ -7,6 +7,7 @@ import se.me.demo.exceptions.UserNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import se.me.demo.model.AppUser;
+import se.me.demo.model.AppUserDTO;
 import se.me.demo.repository.AppUserRepository;
 
 import java.util.List;
@@ -32,6 +33,4 @@ public class MyUserDetailsService implements UserDetailsService {
                 List.of(new SimpleGrantedAuthority("ROLE_"+user.getRole().toUpperCase()))
         );
     }
-
-
 }
