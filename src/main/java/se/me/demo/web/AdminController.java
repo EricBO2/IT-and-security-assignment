@@ -1,5 +1,6 @@
 package se.me.demo.web;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminController {
 
     @GetMapping
-    public @ResponseBody String showAdminPage() {
-        return "admin";
+    public ResponseEntity<String> showAdminPage() {
+
+        return ResponseEntity.ok("Welcome admin");
     }
 }

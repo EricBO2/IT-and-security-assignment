@@ -1,29 +1,34 @@
 package se.me.demo.web;
 
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import se.me.demo.model.AppUser;
+import se.me.demo.service.AppUserService;
 
 @RestController
 @RequestMapping("/register")
 public class FormContoller {
 
-    @GetMapping
-    public @ResponseBody String showForm(Model model) {
-        model.addAttribute("user", new AppUser());
-        return "form";
+    AppUserService appUserService;
+
+    public FormContoller(AppUserService appUserService) {
+        this.appUserService = appUserService;
     }
 
     @PostMapping
-    public @ResponseBody String handleForm(@Valid @ModelAttribute AppUser user, BindingResult bindingResult) {
+    public ResponseEntity<String> handleForm(@Valid AppUser user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "form";
+            return ResponseEntity.badRequest().body("hej i just met you");// add globel exeption handeler
         }
-        // här ska cod skrivas som sparara user i data basen / callar på clasen som gör det
+        return appUserService.postUser(user);
+    }
 
-        return "home";
+    @DeleteMapping
+    public ResponseEntity<String> handleDelete(String name) {
+        return appUserService.deleteUser(name);
     }
 }
