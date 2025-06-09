@@ -1,9 +1,11 @@
 package se.me.demo.service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import se.me.demo.model.AppUser;
 import se.me.demo.model.AppUserDTO;
 
+@Service
 public class DTOConverter {
 
     private PasswordEncoder passwordEncoder;

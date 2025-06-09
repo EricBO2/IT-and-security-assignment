@@ -6,32 +6,36 @@ import jakarta.validation.ConstraintValidatorContext;
 public class PasswordConstraintValidator implements ConstraintValidator<ValidPassword, String> {
 
     @Override
-    public boolean isValid(String password, ConstraintValidatorContext context) {
+    public boolean isValid(String password,
+                           ConstraintValidatorContext ctx) {
+
+        ctx.disableDefaultConstraintViolation();
+
         if (password == null) {
-            System.out.println("Please enter password");
+            ctx.buildConstraintViolationWithTemplate("Please enter a password")
+                    .addConstraintViolation();
             return false;
         }
-
-        if (password.length() <= 8) {
-            System.out.println("Password must be at least 8 characters long");
+        if (password.length() < 8) {
+            ctx.buildConstraintViolationWithTemplate("Password must be at least 8 characters")
+                    .addConstraintViolation();
             return false;
         }
-
         if (!password.matches(".*[A-Z].*")) {
-            System.out.println("Password must contain at least one uppercase letter");
+            ctx.buildConstraintViolationWithTemplate("Password must contain at least one uppercase letter")
+                    .addConstraintViolation();
             return false;
         }
-
-        if (password.replaceAll("[^0-9]", "").length() <= 2) {
-            System.out.println("Password must contain at least two digits");
+        if (password.replaceAll("[^0-9]", "").length() < 2) {
+            ctx.buildConstraintViolationWithTemplate("Password requires at least 2 numbers")
+                    .addConstraintViolation();
             return false;
         }
-
-        if (password.replaceAll("[^!@#$%&*]", "").length() <= 2) {
-            System.out.println("Password must contain at least two special character");
+        if (password.replaceAll("[^!@#$%&*]", "").length() < 2) {
+            ctx.buildConstraintViolationWithTemplate("Password requires at least 2 special characters")
+                    .addConstraintViolation();
             return false;
         }
-
         return true;
     }
 
