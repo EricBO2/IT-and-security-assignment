@@ -1,5 +1,8 @@
 package se.me.demo.model;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import se.me.demo.util.ValidPassword;
 
@@ -9,6 +12,7 @@ import se.me.demo.util.ValidPassword;
  * Innehåller även felmeddelanden ifall användarnamn och lösenord inte godkänts
  */
 public class AppUserDTO {
+
     @NotBlank(message = "Please enter username")
     private String username;
 
@@ -19,6 +23,7 @@ public class AppUserDTO {
     private String role;
 
     private Boolean consentGiven;
+
 
     public String getUsername() {
         return username;
