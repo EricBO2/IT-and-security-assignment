@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+
+/**
+ * Denna klass hanterar exceptions
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)

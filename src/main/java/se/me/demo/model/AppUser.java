@@ -4,10 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
 
-import se.me.demo.util.ValidPassword;
 
+/**
+ * Objektet innehåller all information om användaren
+ */
 @Entity
 public class AppUser {
 

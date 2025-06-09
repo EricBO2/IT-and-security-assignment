@@ -1,11 +1,13 @@
 package se.me.demo.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import se.me.demo.util.ValidPassword;
 
+/**
+ * Är en DTO klass av AppUserklassen.
+ * Detta gör vi för att inte koppla användaren direkt till databasen.
+ * Innehåller även felmeddelanden ifall användarnamn och lösenord inte godkänts
+ */
 public class AppUserDTO {
     @NotBlank(message = "Please enter username")
     private String username;

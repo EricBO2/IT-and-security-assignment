@@ -2,11 +2,7 @@ package se.me.demo.web;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import se.me.demo.model.AppUser;
 import se.me.demo.model.AppUserDTO;
 import se.me.demo.service.AppUserService;
 
