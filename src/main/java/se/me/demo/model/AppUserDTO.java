@@ -7,9 +7,6 @@ import jakarta.validation.constraints.NotBlank;
 import se.me.demo.util.ValidPassword;
 
 public class AppUserDTO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @NotBlank(message = "Please enter username")
     private String username;
@@ -22,14 +19,6 @@ public class AppUserDTO {
 
     private Boolean consentGiven;
 
-    public Long getId() {
-        return id;
-    }
-
-    public AppUserDTO setId(Long id) {
-        this.id = id;
-        return this;
-    }
 
     public String getUsername() {
         return username;

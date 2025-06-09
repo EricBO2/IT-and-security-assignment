@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import se.me.demo.model.AppUser;
+import se.me.demo.model.AppUserDTO;
 import se.me.demo.service.AppUserService;
 
 @RestController
@@ -20,10 +21,7 @@ public class FormContoller {
     }
 
     @PostMapping
-    public ResponseEntity<String> handleForm(@Valid AppUser user, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return ResponseEntity.badRequest().body("hej i just met you");// add globel exeption handeler
-        }
+    public ResponseEntity<String> handleForm( AppUserDTO user) {
         return appUserService.postUser(user);
     }
 
