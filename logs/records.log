@@ -1,0 +1,2 @@
+2025-06-09 15:43:40 [http-nio-8080-exec-8] WARN  se.me.demo.util.LoggerComponent - User Eric created
+2025-06-09 15:45:03 [http-nio-8080-exec-1] WARN  se.me.demo.util.LoggerComponent - User Bob created

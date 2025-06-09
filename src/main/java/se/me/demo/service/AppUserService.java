@@ -36,7 +36,7 @@ public class AppUserService {
     }
 
     public ResponseEntity<String> deleteUser(String user) {
-        if (appUserRepository.findByUsername(user) == null) {
+        if (appUserRepository.findByUsername(user) != null) {
             appUserRepository.delete(appUserRepository.findByUsername(user));
             logger.logWarn("User "+user+" deleted");
             return ResponseEntity.ok().body("User deleted successfully");

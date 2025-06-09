@@ -25,6 +25,7 @@ public class DTOConverter {
         appUser.setUsername(userDTO.getUsername());
         appUser.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         appUser.setRole(userDTO.getRole());
+        appUser.setConsentGiven(userDTO.getConsentGiven());
         return appUser;
     }
 
@@ -33,6 +34,7 @@ public class DTOConverter {
         userDTO.setUsername(appUser.getUsername());
         userDTO.setPassword(appUser.getPassword());
         userDTO.setRole(appUser.getRole());
+        userDTO.setConsentGiven(appUser.getConsentGiven());
         return userDTO;
     }
 }
