@@ -1,7 +1,6 @@
 package se.me.demo.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import se.me.demo.model.AppUser;
@@ -36,14 +35,14 @@ public class AppUserService {
     }
 
     public ResponseEntity<String> deleteUser(String user) {
-        if (appUserRepository.findByUsername(user) == null) {
+        if (appUserRepository.findByUsername(user) != null) {
             appUserRepository.delete(appUserRepository.findByUsername(user));
             logger.logWarn("User "+user+" deleted");
             return ResponseEntity.ok().body("User deleted successfully");
         }
         else{
             logger.logError("User "+user+" dose not exists");
-            return ResponseEntity.badRequest().body("Username already doesn't exists");
+            return ResponseEntity.badRequest().body("Username doesn't exist");
         }
     }
 }
