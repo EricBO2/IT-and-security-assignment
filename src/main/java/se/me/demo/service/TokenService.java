@@ -11,15 +11,27 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.stream.Collectors;
 
+/**
+ * Denna klass används för att skapa tokens till användaren.
+ */
 @Service
 public class TokenService {
 
     private final JwtEncoder jwtEncoder;
 
+    /**
+     * Denna konstruktor injectar parametern jwtEncoder
+     * @param jwtEncoder
+     */
     public TokenService(JwtEncoder jwtEncoder) {
         this.jwtEncoder = jwtEncoder;
     }
 
+    /**
+     * Denna metod skapar en token till användaren för autentisering.
+     * @param authentication Representerar en autentiserad användare.
+     * @return En token till användaren.
+     */
     public String generateToken(Authentication authentication) {
         Instant now = Instant.now();
         String scope = authentication.getAuthorities().stream()

@@ -11,14 +11,30 @@ import se.me.demo.repository.AppUserRepository;
 
 import java.util.List;
 
+/**
+ * Denna klass implementerar från interfacet UserDetailsService. Denna klass används för att
+ * hämta användare.
+ */
 @Service
 public class MyUserDetailsService implements UserDetailsService {
     private AppUserRepository appUserRepository;
     private PasswordEncoder passwordEncoder;
+
+    /**
+     * Denna konstruktor injectar samtliga parametrar.
+     * @param appUserRepository
+     * @param passwordEncoder
+     */
     public MyUserDetailsService(AppUserRepository appUserRepository, PasswordEncoder passwordEncoder) {
         this.appUserRepository = appUserRepository;
         this.passwordEncoder = passwordEncoder;
     }
+
+    /**
+     * Denna metod hämtar önskad användare.
+     * @param username Representerar användaren man vill hämta.
+     * @return Skickar information om användaren.
+     */
     @Override
     public UserDetails loadUserByUsername(String username) {
         AppUser user = appUserRepository.findByUsername(username);

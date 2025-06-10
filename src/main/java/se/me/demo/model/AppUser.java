@@ -7,7 +7,8 @@ import jakarta.persistence.Id;
 
 
 /**
- * Objektet innehåller all information om användaren
+ * Objektet innehåller all information om användaren som skickas fram och tillbaka till databasen.
+ * Eget Id genereras automatiskt.
  */
 @Entity
 public class AppUser {

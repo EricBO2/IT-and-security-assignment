@@ -31,13 +31,24 @@ import java.security.interfaces.RSAPublicKey;
 import java.util.UUID;
 
 
+/**
+ * Denna klass konfigurerar säkerheten
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
+    /**
+     * Denna metod stänger av CSRF, bestämmer vad olika roller har tillgång till på webbsidan
+     * och alla förfrågningar måste gå igenom den här metoden.
+     *
+     * @param http Den är av klassen HTTPSecurity och ger oss tillgång att
+     *        modifiera SecurityFilterChain
+     * @return En modifierad variant av SecurityFilterChain
+     *
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
         http.csrf(csrf -> csrf.disable());
         http.sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
@@ -67,6 +78,12 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+    /**
+     * Denna metod hämtar en generator som genererar keypairs
+     * @return Ett keypair
+     *
+     */
     @Bean
     public KeyPair keyPair() throws NoSuchAlgorithmException {
         KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
@@ -74,11 +91,20 @@ public class SecurityConfig {
         return generator.generateKeyPair();
     }
 
+    /**
+     * Denna klass skapar en ny passWordEncoder
+     * @return En ny passWordEncoder
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Sätter upp en JWK source för att senare använda den för att skapa en encoder.
+     * @param keyPair Är ett nyckelpar som transformeras för att kunna encoda JWT-tokens.
+     * @return En JWTSource returneras som används för att skapa en encoder.
+     */
     @Bean
     public JWKSource<SecurityContext> jwkSource(KeyPair keyPair) {
         RSAKey rsaKey = new RSAKey.Builder((RSAPublicKey) keyPair.getPublic())
@@ -89,16 +115,33 @@ public class SecurityConfig {
         return (jwkSelector, context) -> jwkSelector.select(jwkSet);
     }
 
+    /**
+     * Denna metod skapar en JWT
+     * @param jwkSource Denna parameter används för att skapa en encoder.
+     * @return Skapar en ny encoder med jwkSource som parameter.
+     */
     @Bean
     public JwtEncoder jwtEncoder(JWKSource<SecurityContext> jwkSource) {
         return  new NimbusJwtEncoder(jwkSource);
     }
 
+    /**
+     * Denna metod använder keypairs för skapa en decoder.
+     * @param keyPair Samma nyckelpar som tidigare som används för att matcha vår encoder.
+     * @return En decoder skapas
+     */
     @Bean
     public JwtDecoder jwtDecoder(KeyPair keyPair) {
         return NimbusJwtDecoder.withPublicKey((RSAPublicKey) keyPair.getPublic()).build();
     }
 
+    /**
+     * Denna metod skapar en provider och sätter den med en vår userDetailsService och
+     * passWordEncoder. Detta används vid inloggning.
+     * @param myUserDetailsService Denna sätts in i providern
+     * @param passwordEncoder Denna sätts in i providern
+     * @return Returnerar en ny ProviderManager som tar in vår provider.
+     */
     @Bean
     public AuthenticationManager authenticationManager(
             MyUserDetailsService myUserDetailsService,
@@ -108,6 +151,12 @@ public class SecurityConfig {
         provider.setPasswordEncoder(passwordEncoder);
         return new ProviderManager(provider);
     }
+
+    /**
+     * Översätter tokens claims till roller i spring security.
+     * @return En authenticationConverter som kontrollerar vad för tokens
+     * som hör till vilka roller.
+     */
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter(){
         JwtGrantedAuthoritiesConverter converter = new JwtGrantedAuthoritiesConverter();

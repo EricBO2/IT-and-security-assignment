@@ -3,8 +3,17 @@ package se.me.demo.util;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+/**
+ * Denna klass innehåller logiken till annotationen @ValidPassword
+ */
 public class PasswordConstraintValidator implements ConstraintValidator<ValidPassword, String> {
 
+    /**
+     * Denna metod validerar om ett lösenord uppfyller samtliga krav vid registering.
+     * @param password Representerar lösenordet användaren väljer.
+     * @param ctx Används för att anpassa felmeddelanden vid validering.
+     * @return En boolean som representerar om ett lösenord är godkänt eller inte.
+     */
     @Override
     public boolean isValid(String password,
                            ConstraintValidatorContext ctx) {
