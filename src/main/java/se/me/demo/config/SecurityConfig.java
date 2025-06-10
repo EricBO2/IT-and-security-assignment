@@ -51,11 +51,10 @@ public class SecurityConfig {
                         "/swagger-ui/**",
                         "/v3/api-docs/**",
                         "/v3/api-docs.yaml",
-                        "/register",
                         "/home"
                     ).permitAll()
                         .requestMatchers("/user").hasAnyRole("USER","ADMIN")
-                        .requestMatchers("/admin").hasRole("ADMIN"));
+                        .requestMatchers("/register","/admin").hasRole("ADMIN"));
 
 
         http.authorizeHttpRequests(authorize ->
