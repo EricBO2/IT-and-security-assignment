@@ -11,18 +11,34 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
+// UserRepositoryTest
+// ========================================
+
 @DataJpaTest
 @ActiveProfiles("test")
 public class UserRepositoryTest {
 
     @Autowired
-    private UserRepository UserRepository;
+    private UserRepository userRepository;
 
+
+    //  Kontrollera att admin användaren finns i databasen
+    // ========================================
     @Test
     void shouldFindAdminUserInDatabase() {
-        Optional<User> adminUser = UserRepository.findByUsername("admin");
 
-        assertThat(adminUser).isPresent();
-        assertThat(adminUser.get().getRoles()).isEqualTo("ROLE_ADMIN");
+        // Försöker hämta användare med användarnamn admin
+        Optional<User> adminUser = userRepository.findByUsername("admin");
+
+        // Kontrollera att användaren finns
+        assertThat(adminUser)
+                .as("Admin-användare bör finnas i testdatabasen")
+                .isPresent();
+
+        // Kontrollera att rollen är korrekt
+        assertThat(adminUser.get().getRoles())
+                .as("Admin-användaren ska ha rätt roll")
+                .isEqualTo("ROLE_ADMIN");
     }
 }

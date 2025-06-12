@@ -17,7 +17,7 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private String roles;
+    private String role;
 
 
     public User() {
@@ -26,7 +26,7 @@ public class User {
     public User(String username, String password, String roles) {
         this.username = username;
         this.password = password;
-        this.roles = roles;
+        this.role = roles;
     }
 
 
@@ -55,11 +55,11 @@ public class User {
     }
 
     public String getRoles() {
-        return roles;
+        return role;
     }
 
     public void setRoles(String roles) {
-        this.roles = roles;
+        this.role = roles;
     }
 
 
@@ -68,7 +68,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", roles='" + roles + '\'' +
+                ", roles='" + role + '\'' +
                 '}';
     }
 }
