@@ -1,4 +1,4 @@
-package se.me.demo;
+package com.example.secureuserapi.util;
 
 
 import org.junit.jupiter.api.DisplayName;

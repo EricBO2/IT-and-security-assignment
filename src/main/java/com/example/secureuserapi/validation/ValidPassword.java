@@ -1,6 +1,6 @@
 package com.example.secureuserapi.validation;
 
-import com.example.secureuserapi.util.PasswordConstraintValidator;
+import se.me.demo.util.PasswordConstraintValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 

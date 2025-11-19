@@ -1,4 +1,4 @@
-package se.me.demo;
+package com.example.secureuserapi.util;
 
 import jakarta.validation.ConstraintValidatorContext;
 import org.junit.jupiter.api.DisplayName;

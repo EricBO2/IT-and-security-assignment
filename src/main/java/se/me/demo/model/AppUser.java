@@ -5,25 +5,27 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-
 /**
- * Objektet innehåller all information om användaren som skickas fram och tillbaka till databasen.
- * Eget Id genereras automatiskt.
+ *
+ * @Entity gör att Spring vet att det är en databasentitet.
  */
 @Entity
 public class AppUser {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //  Fält för användarnamn, lösenord och roll
     private String username;
-
     private String password;
-
     private String role;
 
+    //  Om användaren godkänt t.ex. villkor
     private Boolean consentGiven;
+
+    // ======== GETTERS & SETTERS ==========
 
     public Long getId() {
         return id;
@@ -69,4 +71,6 @@ public class AppUser {
         this.consentGiven = consentGiven;
         return this;
     }
+
+
 }
