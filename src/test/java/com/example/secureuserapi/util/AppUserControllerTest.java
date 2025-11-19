@@ -1,4 +1,4 @@
-package com.example.secureuserapi.util;
+package se.me.demo;
 
 
 import org.junit.jupiter.api.DisplayName;
@@ -52,6 +52,6 @@ public class AppUserControllerTest {
                         .param("username", "jwtuser")
                         .param("password", "Password!2"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("."))); // JWT innehåller punkter
+                .andExpect(content().string(containsString(".")));
     }
 }
